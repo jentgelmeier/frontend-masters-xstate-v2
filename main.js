@@ -1,2 +1,5 @@
 import './style.css';
-import { createMachine } from 'xstate';
+import { createMachine, interpret } from 'xstate';
+
+const machine = createMachine({});
+

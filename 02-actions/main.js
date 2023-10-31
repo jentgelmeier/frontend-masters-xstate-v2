@@ -11,6 +11,7 @@ const playerMachine = createMachine({
       on: {
         LOADED: {
           // Add an action here to assign the song data
+          actions: [() => console.log('assign song data')],
           target: 'playing',
         },
       },
@@ -22,7 +23,9 @@ const playerMachine = createMachine({
     },
     playing: {
       // When this state is entered, add an action to play the audio
+      entry: [() => console.log('play audio')],
       // When this state is exited, add an action to pause the audio
+      exit: [() => console.log('pause audio')],
       on: {
         PAUSE: { target: 'paused' },
       },
@@ -31,19 +34,27 @@ const playerMachine = createMachine({
   on: {
     SKIP: {
       // Add an action to skip the song
+      actions: [() => console.log('skip song')],
       target: 'loading',
     },
     LIKE: {
       // Add an action to like the song
+      actions: [() => console.log('like song')],
     },
     UNLIKE: {
       // Add an action to unlike the song
+      actions: [() => console.log('unlike song')],
     },
     DISLIKE: {
       // Add two actions to dislike the song and raise the skip event
+      actions: [
+        raise({ type: 'UNLIKE' }),
+        raise({ type: 'SKIP' }),
+      ],
     },
     VOLUME: {
       // Add an action to assign to the volume
+      actions: [() => console.log('adjust volume')],
     },
   },
 }).withConfig({
